@@ -1,0 +1,98 @@
+swagger: '2.0'
+info:
+  title: YourApp
+  description: 'your App'
+  version: 1.0.0
+host: 'localhost:5000'
+basePath: /service/
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /users:
+    get:
+      tags:
+        - users
+      summary: get all users (search)
+      x-swagger-router-controller: users.search
+      parameters:
+        - name: q
+          in: query
+          required: false
+          type: string
+          description: search inside email and fname and lname
+
+      responses:
+        '200':
+          description: users list
+          schema:
+            $ref: '#/definitions/user'
+
+    put:
+      tags:
+        - users
+      summary: insert user
+      x-swagger-router-controller: users.insert
+      parameters:
+        - name: user
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/user'
+
+      responses:
+        '200':
+          description: users added
+          schema:
+            $ref: '#/definitions/user'
+
+
+
+  /server/time:
+    get:
+      tags:
+        - hours
+      summary: the local server time
+      x-swagger-router-controller: server.time
+      responses:
+        '200':
+          description: the local server time answer
+
+  /about:
+    get:
+      tags:
+        - about
+      summary: About this API
+      x-swagger-router-controller: about.about
+      parameters:
+        - name: name
+          in: query
+          required: false
+          type: string
+      responses:
+        '200':
+          description: About
+          schema:
+            $ref: '#/definitions/about'
+
+
+definitions:
+  user:
+    type: object
+    properties:
+      fname:
+        type: string
+      lname:
+        type: string
+      email:
+        type: string
+
+  about:
+    type: object
+    properties:
+      version:
+        type: string
+      name:
+        type: string
