@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  title: YourApp
+  title: Viajes
   description: 'your App'
   version: 1.0.0
 host: 'localhost:5000'
@@ -11,88 +11,90 @@ produces:
   - application/json
 
 paths:
-  /users:
+  
+  /airports:
     get:
       tags:
-        - users
-      summary: get all users (search)
-      x-swagger-router-controller: users.search
-      parameters:
-        - name: q
-          in: query
-          required: false
-          type: string
-          description: search inside email and fname and lname
-
+        - aiports
+      summary: get all aiports of the world!
+      x-swagger-router-controller: aiports
       responses:
         '200':
-          description: users list
+          description: airports list
           schema:
-            $ref: '#/definitions/user'
-
-    put:
-      tags:
-        - users
-      summary: insert user
-      x-swagger-router-controller: users.insert
-      parameters:
-        - name: user
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/user'
-
-      responses:
-        '200':
-          description: users added
-          schema:
-            $ref: '#/definitions/user'
-
-
-
-  /server/time:
+            $ref: '#/definitions/aiport'
+            
+  /countries:
     get:
       tags:
-        - hours
-      summary: the local server time
-      x-swagger-router-controller: server.time
+        - countries
+      summary: get all countries of the world!
+      x-swagger-router-controller: countries
       responses:
         '200':
-          description: the local server time answer
-
-  /about:
+          description: countries list
+          schema:
+            $ref: '#/definitions/country'
+            
+  /states:
     get:
       tags:
-        - about
-      summary: About this API
-      x-swagger-router-controller: about.about
-      parameters:
-        - name: name
-          in: query
-          required: false
-          type: string
+        - states
+      summary: get all states
+      x-swagger-router-controller: states
       responses:
         '200':
-          description: About
+          description: states list
           schema:
-            $ref: '#/definitions/about'
-
-
+            $ref: '#/definitions/state'
+          
 definitions:
-  user:
-    type: object
-    properties:
-      fname:
-        type: string
-      lname:
-        type: string
-      email:
-        type: string
 
-  about:
+  aiport:
     type: object
     properties:
-      version:
+      iata:
         type: string
+      lon:
+        type: string
+      iso:
+        type: string
+      status:
+        type: number
       name:
         type: string
+      continent:
+        type: string
+      type:
+        type: string
+      lat:  
+        type: number
+      size:
+        type: string
+        
+  country:
+    type: object
+    properties:
+      name:
+        type: string
+      code:
+        type: string
+      continent:
+        type: string
+      filename:
+        type: string
+  
+  state:
+    type: object
+    properties:
+      name:
+        type: string
+      code:
+        type: string
+    
+        
+
+    
+    
+            
+  
